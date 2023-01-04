@@ -5,7 +5,7 @@ with pos
 as
 (  
    --Handling duplicate values  using QUALIFY clause and ROW_NUMBER() function
-     select * from layer_bronze.UPLOADFILES_CLIENT_DATA_CSV
+     select * from LAYER_BRONZE.UPLOADFILES_CLIENT_DATA_CSV
       qualify row_number() over(partition by recordnumber order by recordnumber)=1 order by RECORDNUMBER
 
 )
