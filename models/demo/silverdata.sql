@@ -5,7 +5,7 @@ with pos
 as
 (  
    --Handling duplicate values  using QUALIFY clause and ROW_NUMBER() function
-     select * from airbyte_load.TRANSANDPOS
+     select * from LAYER_BRONZE.UPLOADFILES_CLIENT_DATA_CSV
       qualify row_number() over(partition by recordnumber order by recordnumber)=1 order by RECORDNUMBER
 
 )
@@ -30,6 +30,7 @@ and clientid is not null
 and ( producttype != '' and producttype is not null)
 and (producttype not RLIKE '[^a-zA-Z0-9]' and typeofqfc not rlike '[^a-zA-Z0-9]')
 and ASOFDATE like '____-__-__%'
+and Collateralized in ('Y','N')
 
 
 
